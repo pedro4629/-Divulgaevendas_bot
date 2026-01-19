@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: webhook
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn webhook:app --bind 0.0.0.0:5000
+    plan: free
+  - type: worker
+    name: bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    plan: free
